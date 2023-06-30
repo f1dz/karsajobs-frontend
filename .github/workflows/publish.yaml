@@ -24,6 +24,11 @@ jobs:
               registry: ${{ env.REGISTRY }}
               username: ${{ github.actor }}
               password: ${{ secrets.GITHUB_TOKEN }}
+
+          - name: lint-dockerfile
+            uses: hadolint/hadolint-action@v3.1.0
+            with:
+                dockerfile: Dockerfile
         
           - name: Extract metadata (tags, labels) for Docker
             id: meta
@@ -31,7 +36,7 @@ jobs:
             with:
                 images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
     
-          - name: Build the app Docker image with version as tag
+          - name: build-app-karsajobs-ui
             uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
             with:
                 context: .
