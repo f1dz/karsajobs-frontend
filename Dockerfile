@@ -10,10 +10,10 @@ WORKDIR /app
 COPY /karsajobs-ui /app/
 
 # Install libs and build the app
-RUN npm install --unsafe-perm && npm run build
+RUN npm install --unsafe-perm && npm run lint && npm run build
 
 # Expose port so can be access from outside
-EXPOSE 8080
+EXPOSE 8000
 
 # Command to start the app. Will be executed when the container is up
-CMD ["npm","start"]
+CMD ["npm", "run", "production"]
